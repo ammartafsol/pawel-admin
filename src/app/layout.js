@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./styles/globals.css";
 import "./styles/typography.css";
-import StaffLayout from "@/components/atoms/StaffLayout/StaffLayout";
+import ConditionalLayout from "@/components/atoms/ConditionalLayout/ConditionalLayout";
 
 const helveticaNeue = localFont({
   src: [
@@ -107,7 +107,7 @@ export default function RootLayout({ children }) {
         <ToastContainer />
         <CustomProvider>
           {/* <SocketProvider> */}
-          <StaffLayout>{children}</StaffLayout>
+          <ConditionalLayout>{children}</ConditionalLayout>
           {/* </SocketProvider> */}
         </CustomProvider>
       </body>
