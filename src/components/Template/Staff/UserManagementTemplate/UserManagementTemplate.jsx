@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import classes from "./UserManagementTemplate.module.css"
 import Wrapper from '@/components/atoms/Wrapper/Wrapper';
 import TableHeader from '@/components/molecules/TableHeader/TableHeader';
@@ -14,6 +14,7 @@ import { IoAddCircle } from "react-icons/io5";
 
 const UserManagementTemplate = () => {
   const [searchValue, setSearchValue] = useState("");
+  const [selectedTab, setSelectedTab] = useState('staff');
 
   const handleFilterClick = () => {
     // Filter functionality can be implemented here
@@ -47,17 +48,61 @@ const UserManagementTemplate = () => {
     }
   ];
 
+  const tableHeaders = useMemo(() => {
+    const headers = [...userManagementTableHeader];
+    
+    // Update first column title based on selected tab
+    if (headers.length > 0) {
+      headers[0].title = selectedTab === 'staff' ? 'Staff Name' : 'Client Name';
+    }
+
+    // Add Permissions column for staff tab
+    if (selectedTab === 'staff') {
+      // Check if Permissions column already exists
+      const permissionsIndex = headers.findIndex(h => h.key === 'permissions');
+      if (permissionsIndex === -1) {
+        // Insert Permissions column after Number of Cases
+        const numberOfCasesIndex = headers.findIndex(h => h.key === 'numberOfCases');
+        const insertIndex = numberOfCasesIndex !== -1 ? numberOfCasesIndex + 1 : 2;
+        
+        headers.splice(insertIndex, 0, {
+          title: "Permissions",
+          key: "permissions",
+          style: { width: "15%" },
+          renderItem: ({ data }) => {
+            const count = data.permissionsCount || 0;
+            return (
+              <div className={classes.permissionsBadge}>
+                +{count}
+              </div>
+            );
+          },
+        });
+      }
+    } else {
+      // Remove Permissions column for client tab
+      const permissionsIndex = headers.findIndex(h => h.key === 'permissions');
+      if (permissionsIndex !== -1) {
+        headers.splice(permissionsIndex, 1);
+      }
+    }
+
+    return headers;
+  }, [selectedTab]);
+
   return (
     <div className='p24'>
       <div className={classes.tabBtnContainer}>
-        <TabsComponent/>
-          <Button 
-            onClick={() => {}} 
-            className={classes?.viewAllBtn} 
-            leftIcon={<IoAddCircle size={20} color="var(--white)" />} 
-            label={'Add New User'}
-            variant="primary"
-          />
+        <TabsComponent onTabChange={setSelectedTab} defaultTab="staff"/>
+          {selectedTab === 'staff' && (
+            <Button 
+              onClick={() => {}} 
+              className={classes?.viewAllBtn} 
+              leftIcon={<IoAddCircle size={20} color="var(--white)" />} 
+              label={'Add New User'}
+              variant="primary"
+            />
+          )}
       </div>
       <Wrapper 
         headerComponent={
@@ -74,7 +119,7 @@ const UserManagementTemplate = () => {
         contentClassName={classes.contentClassName}
       >
         <ResponsiveTable
-          tableHeader={userManagementTableHeader}
+          tableHeader={tableHeaders}
           data={userManagementTableBody}
         />
       </Wrapper>
