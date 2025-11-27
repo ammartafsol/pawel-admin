@@ -1,0 +1,116 @@
+:root {
+  --error: #db1717;
+
+  /* Black Shades */
+  --black: #000000;
+  --midnight-steel: #183053;
+  --midnight-ink: #0d0d12;
+  --charcoal-grey: #5c5c5c;
+  --charcoal-night: #414149;
+
+  /* White Shades */
+  --white: #ffffff;
+  --ghost-white: #f0f0f5;
+
+ 
+
+  /* ///gray  */
+  --steel-mist: #808897;
+  --frost-whisper: #e4e5e7;
+  --border-color:#E5E5E9;
+  --border-color-2: #EEE;
+  --placeholder-color:#A4ABB8;
+  --slate-shadow: #666d80;
+  --storm-grey: #87878e;
+  --misty-slate: #acacb2;
+  --snowfall: #ebebeb;
+  --lavender-gray: #D3D3E2;
+  --mist-gray: rgba(240, 240, 245, 0.50);
+  --progress-bg: #D9D9D9;
+
+
+  /* Blue Shades */
+
+  --electric-azure: #3861fb;
+  --deep-cerulean: #014c85;
+  --sky-glow: #62c1f8;
+  --morning-sky: #89b5fd;
+  
+
+  /* Purple Shades */
+  --electric-violet: #8e5afd;
+
+  /* Gradients */
+ 
+
+  /* Misc */
+
+  --mint-frost: #b7eae8;
+  --turquoise-wave: #33c8c2;
+  --smoky-slate: #63636c;
+  --sage-green: #9bb167;
+  --Success-40: #9bb167;
+  --deep-teal-color: #024F69;
+  --cool-blue-color: #024FE9;
+  --charcoal-gray: #222227;
+  --steel-blue: #507B94;
+  --lavender-gray: #BABAD3;
+  --cloud-gray: #E3E3ED;
+  --midnight-black: #111216;
+  --slate-gray: #44464D;
+  --silver-gray: #E0E0E1;
+  --storm-gray: #979AA5;
+  --ash-gray: #74767B;
+  --sky-blue: #94D8FC;
+  --ice-blue: #C0E6FD;
+  --ghost-white: #FCFCFD;
+  --slate-gray-1: #323232;
+  --ocean-blue: #3DA4F4;
+  --royal-blue: #1F71D6;
+  --marine-blue: #1F5CAE;
+  --midnight-blue: #151529;
+  --light-gray: #eaeaea;
+  --light-gray-2: #FAFAFA;
+  --charcoal-gray: #262626;
+  --graphite: #808080;
+  --moonstone-gray: #5d5d6e;
+  --sage-gray: #708078;
+  --mint-breeze: #e3fcef;
+  --jade-shadow: #006644;
+  --sky-blue: #0d93ff;
+  --shadow-moss: #030f0b;
+  --outlined-dark: #9B9BBC;
+  --sea-green: #00847F;
+  --light-purple: #8484AE;
+  --divider: #EDEDED;
+  --off-white: #f8f9fb;
+  --check-icon: #006644;
+  --lighter-gray: #656565;
+  --primary-base: #3D3D6B;
+  --grey-icon: #5C615D;
+  --grey-icon2: #696969;
+  --red: #CD3636;
+
+  /* Status Colors - Column 1 */
+  --status-primary: #4A90E2;
+  --status-danger: #8B0000;
+  --status-teal: #00796B;
+  --status-turquoise: #50E3C2;
+  --status-orange: #F5A623;
+  --status-lime: #7ED321;
+  --light-green:#E6FEE8;
+  --dark-green:#188400;
+  --dark-green-2:#007974;
+
+  /* Status Colors - Column 2 */
+  --status-light-blue-1: #EFF9FF;
+  --status-light-blue-2: #C0E6FD;
+  --status-light-blue-3: #62C1F8;
+  --status-light-blue-4: #3DA4F4;
+  --status-blue-1: #1F71D6;
+  --status-blue-2: #1F5CAE;
+  --light-orange:#D9C7AF;
+
+  /* Status Border */
+  --tertiary-100: #E3E3ED;
+}

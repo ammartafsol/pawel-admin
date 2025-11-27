@@ -1,0 +1,32 @@
+.tabFilter {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  border-bottom: 1px solid var(--light-gray);
+  background-color: var(--ghost-white);
+  padding: 0;
+}
+
+.tab {
+  padding: 12px 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--midnight-blue);
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.4px;
+}
+
+
+
+.tab.active {
+  background-color: var(--white);
+  border-radius: 8px 8px 0 0;
+  z-index: 1;
+}
+

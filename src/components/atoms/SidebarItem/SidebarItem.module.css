@@ -1,0 +1,25 @@
+
+.sidebarItem{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+.sidebarItem h5{
+    margin-bottom: 0px !important;
+    color: var(--sage-gray);
+font-size: 16px;
+font-weight: 500;
+line-height: 150%; /* 24px */
+letter-spacing: -0.352px;
+margin-top: 1px;
+}
+
+.sidebarItem.active h5{
+    color: #000100 !important;
+    font-weight: 500 !important;
+}
+
+.sidebarItem.active svg{
+    color: #1F5CAE !important;
+}

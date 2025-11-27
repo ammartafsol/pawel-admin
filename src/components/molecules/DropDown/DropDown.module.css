@@ -1,0 +1,61 @@
+/* DropDown Component Styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+}
+
+.containerWithCenteredLabel {
+  position: relative;
+}
+
+.label {
+  color: var(--slate-shadow);
+  font-size: 14px;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.centeredLabel {
+  color: var(--storm-grey);
+  text-align: left;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  margin: 0;
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  background-color: var(--white, #ffffff);
+  padding: 0 8px;
+}
+.centeredLabel{
+  z-index: 999;
+}
+
+.selectWrapper {
+  position: relative;
+}
+
+.error {
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.dropdownHandle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--midnight-blue);
+  transition: all 0.2s ease-in-out;
+}
+
+.dropdownHandleIcon {
+  transition: all 0.2s ease-in-out;
+}
