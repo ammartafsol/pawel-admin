@@ -11,6 +11,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import DetailActionsWithStats from "@/components/atoms/DetailActionsWithStats/DetailActionsWithStats";
 import { caseManagementCardsData, caseProgressCardsData } from "@/developementContent/Data/dummtData/dummyData";
 import CaseProgressCard from "@/components/molecules/CaseProgressCard/CaseProgressCard";
+import { RiKeyFill } from "react-icons/ri";
 
 const UserManagementDetailTemplate = () => {
   const router = useRouter();
