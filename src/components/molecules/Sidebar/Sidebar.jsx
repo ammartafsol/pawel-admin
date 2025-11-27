@@ -5,6 +5,7 @@ import Image from "next/image";
 import { CiGrid41 } from "react-icons/ci";
 import SidebarItem from "@/components/atoms/SidebarItem/SidebarItem";
 import {
+  financesData,
   StaffHeaderData,
   StaffToolsData,
 } from "@/developementContent/Data/HeaderData/HeaderData";
@@ -34,9 +35,10 @@ const Sidebar = () => {
        
       </div>
       <div className={classes?.sidebarItems}>
-        {StaffHeaderData?.map((item) => {
+        {StaffHeaderData?.map((item,index) => {
           return (
             <SidebarItem
+              key={index}
               icon={item?.icon}
               href={item?.href}
               title={item?.name}
@@ -50,9 +52,27 @@ const Sidebar = () => {
             <h6>Tools</h6>)
       }
       <div className={classes?.sidebarItems}>
-        {StaffToolsData?.map((item) => {
+        {StaffToolsData?.map((item,index) => {
           return (
             <SidebarItem
+              key={index}
+              icon={item?.icon}
+              href={item?.href}
+              title={item?.name}
+              sidebarOpen={sidebarOpen}
+            />
+          );
+        })}
+      </div>
+       {
+        sidebarOpen && (
+            <h6>Finances</h6>)
+      }
+      <div className={classes?.sidebarItems}>
+        {financesData?.map((item,index) => {
+          return (
+            <SidebarItem
+              key={index}
               icon={item?.icon}
               href={item?.href}
               title={item?.name}

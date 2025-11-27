@@ -63,7 +63,7 @@ const router = useRouter();
               headerComponent={
                 <TableHeader
                   viewButtonText="View All"
-                  onClickViewAll={() => router.push("/staff/case-management")}
+                  onClickViewAll={() => router.push("/case-management")}
                   title="Recent Activities"
                   dropdownOptions={reactActivities}
                   dropdownPlaceholder="Select Activity"

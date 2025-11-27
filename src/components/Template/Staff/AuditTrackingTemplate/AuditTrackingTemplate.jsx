@@ -29,7 +29,7 @@ const AuditTrackingTemplate = () => {
         <Col md={5}>
           <Wrapper
             contentClassName={classes?.contentClassName}
-            title="Audit Tracking"
+            title="Case Progress Count By Status"
           >
             <div className={classes.circularCaseProgressChart}>
               <CircularCaseProgressChart data={circularCaseProgressChartData} />
@@ -47,7 +47,7 @@ const AuditTrackingTemplate = () => {
                   <Col className="col-12 col-md-6" key={item.id}>
                     <CaseProgressCard 
                       isStatusVariant
-                      routePath={`/staff/case-management/${item.id}`}
+                      routePath={`/case-management/${item.id}`}
                       data={{
                         tabLabel: item.tabLabel,
                         userName: item.userName,
@@ -75,7 +75,7 @@ const AuditTrackingTemplate = () => {
             headerComponent={
               <TableHeader
                 viewButtonText="View All"
-                onClickViewAll={() => router.push("/staff/case-management")}
+                onClickViewAll={() => router.push("/case-management")}
                 title="Recent Activities"
                 dropdownOptions={reactActivities}
                 dropdownPlaceholder="Select Activity"

@@ -74,7 +74,7 @@ const UserManagementDetailTemplate = () => {
             <Col className="col-12 col-md-4" key={item.id}>
               <CaseProgressCard 
                 isStatusVariant
-                routePath={`/staff/case-management/${item.id}`}
+                routePath={`/case-management/${item.id}`}
                 data={{
                   tabLabel: item.tabLabel,
                   userName: item.userName,

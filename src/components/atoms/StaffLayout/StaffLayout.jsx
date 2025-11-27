@@ -6,7 +6,7 @@ import { CgProfile } from "react-icons/cg";
 
 const StaffLayout = ({ children }) => {
   return (
-    <div className={classes?.staffLayout}>
+    <div className={`${classes?.staffLayout}`}>
       <Sidebar />
       <div className={classes?.rightSide}>
         {/*  right side header */}

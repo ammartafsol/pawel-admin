@@ -199,7 +199,7 @@ const CreateNewCaseModal = ({ show, setShow }) => {
                 <Input
                   placeholder="Type to search"
                   className={classes?.input}
-                  label="primary"
+                  label="Primary"
                   inputClass={classes?.inputClassName}
                   type="search"
                   rightIcon={<IoSearchSharp size={20} />}
@@ -209,7 +209,7 @@ const CreateNewCaseModal = ({ show, setShow }) => {
                 <Input
                   placeholder="Type to search"
                   className={classes?.input}
-                  label="secondary"
+                  label="Secondary"
                   inputClass={classes?.inputClassName}
                   type="search"
                   rightIcon={<IoSearchSharp size={20} />}

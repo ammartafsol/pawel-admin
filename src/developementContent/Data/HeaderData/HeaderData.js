@@ -4,7 +4,7 @@ import { FaRegUser } from "react-icons/fa";
 import { BsQuestionCircle } from "react-icons/bs";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { FiPieChart } from "react-icons/fi";
-
+import { PiTagSimple } from "react-icons/pi";
 
 export const HeaderData = [
   {
@@ -29,19 +29,19 @@ export const StaffHeaderData = [
   {
     id: 1,
     name: "Dashboard",
-    href: "/staff",
+    href: "/",
     icon: <FiGrid size={24} />,
   },
   {
     id: 2,
     name: "Case Management",
-    href: "/staff/case-management",
+    href: "/case-management",
     icon: <FaRegFolderClosed size={24}  />,
   },
   {
     id: 3,
     name: "User Management",
-    href: "/staff/user-management",
+    href: "/user-management",
     icon: <FaRegUser size={24} />,
   },
 ];
@@ -50,20 +50,29 @@ export const StaffHeaderData = [
 export const StaffToolsData = [
   {
     id: 1,
-    name: "Audit Tracking",
-    href: "/staff/audit-tracking",
+    name: "KPI Tracking",
+    href: "/audit-tracking",
     icon: <FiPieChart size={24}  />,
   },
   {
     id: 2,
     name: "Document Management",
-    href: "/staff/document-management",
+    href: "/document-management",
     icon: <IoDocumentTextOutline size={24}  />,
   },
   {
     id: 3,
     name: "Support",
-    href: "/staff/support",
+    href: "/support",
     icon: <BsQuestionCircle size={24}  />,
   }
 ];
+
+export const financesData = [
+  {
+    id: 1,
+    name: "Jurisdiction Management",
+    href: "/audit-tracking",
+    icon: <PiTagSimple size={24}  />,
+  },
+]
