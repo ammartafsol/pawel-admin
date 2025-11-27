@@ -13,6 +13,15 @@
     color: var(--sky-glow);
 }
 
+.tabBtnContainer{
+display: flex;
+height: 64px;
+justify-content: space-between;
+align-items: center;
+flex-shrink: 0;
+border-bottom: 1px solid var(--ghost-white, #F0F0F5);
+
+}
 
 
 
