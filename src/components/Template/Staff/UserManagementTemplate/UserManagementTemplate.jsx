@@ -72,8 +72,11 @@ const UserManagementTemplate = () => {
           renderItem: ({ data }) => {
             const count = data.permissionsCount || 0;
             return (
-              <div className={classes.permissionsBadge}>
-                +{count}
+              <div className={classes.permissionsContainer}>
+                <span className={classes.permissionsText}>Case Management</span>
+                <div className={classes.permissionsBadge}>
+                  +{count}
+                </div>
               </div>
             );
           },

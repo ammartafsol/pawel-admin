@@ -29,6 +29,19 @@ border-bottom: 1px solid var(--ghost-white, #F0F0F5);
     white-space: nowrap;
 }
 
+.permissionsContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.permissionsText {
+    color: var(--midnight-blue, #151529);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+}
+
 .permissionsBadge {
     display: flex;
     width: 28px;
