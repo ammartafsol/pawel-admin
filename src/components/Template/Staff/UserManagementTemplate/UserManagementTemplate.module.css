@@ -23,5 +23,11 @@ border-bottom: 1px solid var(--ghost-white, #F0F0F5);
 
 }
 
+.viewAllBtn{
+    height: 40px !important;
+    width: fit-content !important;
+    white-space: nowrap;
+}
+
 
 

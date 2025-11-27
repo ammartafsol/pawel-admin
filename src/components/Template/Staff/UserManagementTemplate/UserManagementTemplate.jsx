@@ -9,6 +9,8 @@ import { userManagementTableBody } from '@/developementContent/TableBody/UserMan
 import { FaRegUser } from "react-icons/fa";
 import ResponsiveTable from '@/components/organisms/ResponsiveTable/ResponsiveTable';
 import TabsComponent from '@/components/atoms/TabsComponent/TabsComponent';
+import Button from '@/components/atoms/Button';
+import { IoAddCircle } from "react-icons/io5";
 
 const UserManagementTemplate = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -49,6 +51,13 @@ const UserManagementTemplate = () => {
     <div className='p24'>
       <div className={classes.tabBtnContainer}>
         <TabsComponent/>
+          <Button 
+            onClick={() => {}} 
+            className={classes?.viewAllBtn} 
+            leftIcon={<IoAddCircle size={20} color="var(--white)" />} 
+            label={'Add New User'}
+            variant="primary"
+          />
       </div>
       <Wrapper 
         headerComponent={
