@@ -1,10 +1,13 @@
 import UserManagementDetailTemplate from '@/components/Template/Staff/UserManagementDetailTemplate/UserManagementDetailTemplate'
 import React from 'react'
 
-const page = () => {
+const page = async ({ params, searchParams }) => {
+  const { slug } = await params;
+  const { role } = await searchParams;
+  
   return (
     <>
-    <UserManagementDetailTemplate />
+    <UserManagementDetailTemplate role={role || "client"} />
     </>
   )
 }

@@ -12,9 +12,16 @@ import DetailActionsWithStats from "@/components/atoms/DetailActionsWithStats/De
 import { caseManagementCardsData, caseProgressCardsData } from "@/developementContent/Data/dummtData/dummyData";
 import CaseProgressCard from "@/components/molecules/CaseProgressCard/CaseProgressCard";
 import { RiKeyFill } from "react-icons/ri";
+import StatusChip from "@/components/atoms/StatusChip/StatusChip";
 
-const UserManagementDetailTemplate = () => {
+const UserManagementDetailTemplate = ({ role = "client", permissions = [] }) => {
   const router = useRouter();
+  const isStaff = role === "staff";
+  
+  // Default permissions for staff if none provided
+  const defaultPermissions = ["Case Management", "Case Creation", "Case Assignment"];
+  const staffPermissions = permissions.length > 0 ? permissions : defaultPermissions;
+  
   return (
     <div className="p24">
       <Wrapper
@@ -39,17 +46,34 @@ const UserManagementDetailTemplate = () => {
                 <div className={classes.userDetailItem}>
                   <div className={classes.userDetailItemTitle}>
                     <FiUser size={16} color="#8484AE" />
-                    <h5>Client Name</h5>
+                    <h5>{isStaff ? "Staff Name" : "Client Name"}</h5>
                   </div>
                   <h4>Herman Schoen</h4>
                 </div>
-                <div className={classes.userDetailItem}>
-                  <div className={classes.userDetailItemTitle}>
-                    <MdOutlineEmail size={16} color="#8484AE" />
-                    <h5>Client Name</h5>
+                {!isStaff && (
+                  <div className={classes.userDetailItem}>
+                    <div className={classes.userDetailItemTitle}>
+                      <MdOutlineEmail size={16} color="#8484AE" />
+                      <h5>Email</h5>
+                    </div>
+                    <h4>herman.schoen@example.com</h4>
                   </div>
-                  <h4>Herman Schoen</h4>
-                </div>
+                )}
+                {isStaff && (
+                  <div className={classes.userDetailItem}>
+                    <div className={classes.userDetailItemTitle}>
+                      <RiKeyFill size={16} color="#8484AE" />
+                      <h5>Permissions</h5>
+                    </div>
+                    <div className={classes.permissionsContainer}>
+                      {staffPermissions.map((permission, index) => (
+                        <StatusChip key={index} bgColor="#D3D3E2">
+                          {permission}
+                        </StatusChip>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
               </Col>
               <Col md={6}>

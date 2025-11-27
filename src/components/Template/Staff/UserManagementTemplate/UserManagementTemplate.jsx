@@ -11,6 +11,7 @@ import ResponsiveTable from '@/components/organisms/ResponsiveTable/ResponsiveTa
 import TabsComponent from '@/components/atoms/TabsComponent/TabsComponent';
 import Button from '@/components/atoms/Button';
 import { IoAddCircle } from "react-icons/io5";
+import Link from "next/link";
 
 const UserManagementTemplate = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -54,6 +55,25 @@ const UserManagementTemplate = () => {
     // Update first column title based on selected tab
     if (headers.length > 0) {
       headers[0].title = selectedTab === 'staff' ? 'Staff Name' : 'Client Name';
+    }
+
+    // Update the View Details link to include role query parameter
+    const viewDetailsIndex = headers.findIndex(h => h.key === 'viewDetails');
+    if (viewDetailsIndex !== -1) {
+      headers[viewDetailsIndex] = {
+        ...headers[viewDetailsIndex],
+        renderItem: ({ data }) => {
+          return (
+            <Link 
+              href={`/user-management/${data.id}?role=${selectedTab}`}
+              className={classes.viewDetailsLink}
+              onClick={(e) => e.stopPropagation()}
+            >
+              View Details
+            </Link>
+          );
+        },
+      };
     }
 
     // Add Permissions column for staff tab

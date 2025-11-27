@@ -87,3 +87,10 @@ line-height: normal;
 .editButton[color-variant="outlined"]{
     height: 40px !important;
 }
+
+.permissionsContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+}
