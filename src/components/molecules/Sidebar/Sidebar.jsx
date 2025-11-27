@@ -64,23 +64,7 @@ const Sidebar = () => {
           );
         })}
       </div>
-       {
-        sidebarOpen && (
-            <h6>Finances</h6>)
-      }
-      <div className={classes?.sidebarItems}>
-        {financesData?.map((item,index) => {
-          return (
-            <SidebarItem
-              key={index}
-              icon={item?.icon}
-              href={item?.href}
-              title={item?.name}
-              sidebarOpen={sidebarOpen}
-            />
-          );
-        })}
-      </div>
+      
     </div>
   );
 };
