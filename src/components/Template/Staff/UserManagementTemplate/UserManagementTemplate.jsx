@@ -8,7 +8,7 @@ import { userManagementTableHeader } from '@/developementContent/TableHeader/Use
 import { userManagementTableBody } from '@/developementContent/TableBody/UserManagementTableBody';
 import { FaRegUser } from "react-icons/fa";
 import ResponsiveTable from '@/components/organisms/ResponsiveTable/ResponsiveTable';
-import Tabs from '@/components/atoms/Tabs/Tabs';
+import TabsComponent from '@/components/atoms/TabsComponent/TabsComponent';
 
 const UserManagementTemplate = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -48,7 +48,7 @@ const UserManagementTemplate = () => {
   return (
     <div className='p24'>
       <div className={classes.tabBtnContainer}>
-        <Tabs/>
+        <TabsComponent/>
       </div>
       <Wrapper 
         headerComponent={
