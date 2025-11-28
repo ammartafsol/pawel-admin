@@ -46,3 +46,9 @@ export const addNoteFormValues = {
 export const replySupportFormValues = {
   message: "",
 };
+
+export const addNewStaffFormValues = {
+  staffName: "",
+  email: "",
+  permissions: [],
+};

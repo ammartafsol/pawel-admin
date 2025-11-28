@@ -12,10 +12,12 @@ import TabsComponent from '@/components/atoms/TabsComponent/TabsComponent';
 import Button from '@/components/atoms/Button';
 import { IoAddCircle } from "react-icons/io5";
 import Link from "next/link";
+import AddNewStaffModal from '@/components/organisms/Modals/AddNewStaffModal/AddNewStaffModal';
 
 const UserManagementTemplate = () => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedTab, setSelectedTab] = useState('staff');
+  const [showAddNewStaffModal, setShowAddNewStaffModal] = useState(false);
 
   const handleFilterClick = () => {
     // Filter functionality can be implemented here
@@ -119,10 +121,10 @@ const UserManagementTemplate = () => {
         <TabsComponent onTabChange={setSelectedTab} defaultTab="staff"/>
           {selectedTab === 'staff' && (
             <Button 
-              onClick={() => {}} 
+              onClick={() => {setShowAddNewStaffModal(true)}} 
               className={classes?.viewAllBtn} 
               leftIcon={<IoAddCircle size={20} color="var(--white)" />} 
-              label={'Add New User'}
+              label={'Add New Staff'}
               variant="primary"
             />
           )}
@@ -146,6 +148,7 @@ const UserManagementTemplate = () => {
           data={userManagementTableBody}
         />
       </Wrapper>
+      <AddNewStaffModal  show={showAddNewStaffModal} setShow={setShowAddNewStaffModal} />
     </div>
   )
 }
