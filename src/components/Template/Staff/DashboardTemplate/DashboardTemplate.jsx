@@ -15,11 +15,15 @@ import TableHeader from "@/components/molecules/TableHeader/TableHeader";
 import AppTable from "@/components/organisms/AppTable/AppTable";
 import { reactActivities } from "@/developementContent/Enums/enum";
 import { useRouter } from "next/navigation";
+import CreateNewCaseModal from "@/components/organisms/Modals/CreateNewCaseModal/CreateNewCaseModal";
 
 const DashboardTemplate = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState(reactActivities[0]);
-const router = useRouter();
+  const [selectedDropdownValue, setSelectedDropdownValue] = useState(
+    reactActivities[0]
+  );
+  const [showCreateNewCaseModal, setShowCreateNewCaseModal] = useState(false);
+  const router = useRouter();
 
   const handleDropdownChange = (value) => {
     setSelectedDropdownValue(value);
@@ -33,7 +37,7 @@ const router = useRouter();
       </div>
       <div className="p24">
         <Row>
-          <Col lg={7} >
+          <Col lg={7}>
             <Wrapper
               contentClassName={classes?.calenderWrapper}
               headerComponent={<CalenderHeaderDrop />}
@@ -50,6 +54,15 @@ const router = useRouter();
                       {...item}
                       title={item.title}
                       image={item.image}
+                      onClick={
+                        item.title === "Create New Case"
+                          ? () => setShowCreateNewCaseModal(true)
+                          :
+                          item.title === "Add a Document"
+                          ?() => {
+                              router.push("/document-management");
+                            }:undefined
+                      }
                     />
                   </Col>
                 ))}
@@ -82,6 +95,10 @@ const router = useRouter();
           </Col>
         </Row>
       </div>
+      <CreateNewCaseModal
+        show={showCreateNewCaseModal}
+        setShow={setShowCreateNewCaseModal}
+      />
     </div>
   );
 };
