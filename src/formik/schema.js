@@ -59,3 +59,18 @@ export const AddNoteSchema = Yup.object({
 export const ReplySupportSchema = Yup.object({
   message: Yup.string().required("Message is required"),
 });
+
+export const AddNewStaffSchema = Yup.object({
+  staffName: Yup.string().required("Staff Name is required"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required")
+    .test(
+      "no-special-chars",
+      "Email contains invalid characters",
+      (value) => !value || emailRegex.test(value)
+    ),
+  permissions: Yup.array()
+    .min(1, "At least one permission is required")
+    .required("Permissions are required"),
+});

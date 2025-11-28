@@ -27,23 +27,55 @@ const LoginTemplate = () => {
       handleSubmit(values);
     },
   });
+  // const handleSubmit = async(values) => {
+  //   setLoading("loading");
+  //   const obj = { email: values?.email, password: values?.password };
+  //   const { response } = await Post({ route: "auth/login", data: obj });
+  // if(response){
+  //   const token = response?.data?.token;
+  //   const user = response?.data?.user;
+  //   dispatch(saveLoginUserData(response?.data));
+  //   setTokenCookie(token);
+  //   setUserMetadataCookie(user);
+  //   RenderToast({
+  //     type: "info",
+  //     message: "Please complete your profile to continue",
+  //   });
+  //   router.push("/sign-up");
+  //   return;
+  // }
+  // };
   const handleSubmit = async(values) => {
     setLoading("loading");
-    const obj = { email: values?.email, password: values?.password };
-    const { response } = await Post({ route: "auth/login", data: obj });
-  if(response){
-    const token = response?.data?.token;
-    const user = response?.data?.user;
-    dispatch(saveLoginUserData(response?.data));
-    setTokenCookie(token);
-    setUserMetadataCookie(user);
-    RenderToast({
-      type: "info",
-      message: "Please complete your profile to continue",
-    });
-    router.push("/sign-up");
-    return;
-  }
+    
+    // Dummy email logic - redirect based on email
+    const email = values?.email?.toLowerCase() || "";
+    
+    // Check if email contains "staff" or is a staff dummy email
+    if (email.includes("admin")) {
+      // Redirect to staff dashboard
+      router.push("/");
+    } 
+ 
+    
+    setLoading("");
+    
+    // API call commented out for now
+    // const obj = { email: values?.email, password: values?.password };
+    // const { response } = await Post({ route: "auth/login", data: obj });
+    // if(response){
+    //   const token = response?.data?.token;
+    //   const user = response?.data?.user;
+    //   dispatch(saveLoginUserData(response?.data));
+    //   setTokenCookie(token);
+    //   setUserMetadataCookie(user);
+    //   RenderToast({
+    //     type: "info",
+    //     message: "Please complete your profile to continue",
+    //   });
+    //   router.push("/sign-up");
+    //   return;
+    // }
   };
   return (
     <AuthWrapper

@@ -83,3 +83,19 @@ export const auditTrackingOptions = [
     value: "audit-tracking"
   }
 ]
+
+
+export const notificationBtn = [
+  {
+    label: "All",
+    value: "all",
+  },
+  {
+    label: "Read",
+    value: "read",
+  },
+  {
+    label: "UnRead",
+    value: "unread",
+  },
+];
