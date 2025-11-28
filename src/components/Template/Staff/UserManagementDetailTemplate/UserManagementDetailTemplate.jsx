@@ -66,8 +66,8 @@ const UserManagementDetailTemplate = ({ role = "client", permissions = [] }) => 
                       <h5>Permissions</h5>
                     </div>
                     <div className={classes.permissionsContainer}>
-                      {staffPermissions.map((permission, index) => (
-                        <StatusChip key={index} bgColor="#D3D3E2">
+                      {staffPermissions?.map((permission, index) => (
+                        <StatusChip key={index} bgColor="rgba(240, 240, 245, 0.50)">
                           {permission}
                         </StatusChip>
                       ))}
