@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import classes from "./UserManagementDetailTemplate.module.css";
 import Wrapper from "@/components/atoms/Wrapper/Wrapper";
 import Button from "@/components/atoms/Button";
@@ -13,10 +13,16 @@ import { caseManagementCardsData, caseProgressCardsData } from "@/developementCo
 import CaseProgressCard from "@/components/molecules/CaseProgressCard/CaseProgressCard";
 import { RiKeyFill } from "react-icons/ri";
 import StatusChip from "@/components/atoms/StatusChip/StatusChip";
+import TableHeader from "@/components/molecules/TableHeader/TableHeader";
+import { reactActivities } from "@/developementContent/Enums/enum";
+import ResponsiveTable from "@/components/organisms/ResponsiveTable/ResponsiveTable";
+import { staffDashboardTableHeader } from "@/developementContent/TableHeader/StaffDashboardTableHeader";
+import { staffDashboardTableBody } from "@/developementContent/TableBody/StaffDashboardTableBody";
 
 const UserManagementDetailTemplate = ({ role = "client", permissions = [] }) => {
   const router = useRouter();
   const isStaff = role === "staff";
+  const [selectedDropdownValue, setSelectedDropdownValue] = useState(reactActivities[0]);
   
   // Default permissions for staff if none provided
   const defaultPermissions = ["Case Management", "Case Creation", "Case Assignment"];
@@ -95,7 +101,7 @@ const UserManagementDetailTemplate = ({ role = "client", permissions = [] }) => 
               </Col>
             </Row>
             <Row className="g-4 mt-4">
-          {caseManagementCardsData.map((item) => (
+          {!isStaff && caseManagementCardsData?.map((item) => (
             <Col className="col-12 col-md-4" key={item.id}>
               <CaseProgressCard 
                 isStatusVariant
@@ -113,6 +119,30 @@ const UserManagementDetailTemplate = ({ role = "client", permissions = [] }) => 
               />
             </Col>
           ))}
+          {isStaff && (
+             <Col>
+            <Wrapper
+              headerComponent={
+                <TableHeader
+                  viewButtonText="View All"
+                  onClickViewAll={() => router.push("/case-management")}
+                  title="Activities"
+                  dropdownOptions={reactActivities}
+                  dropdownPlaceholder="Select Activity"
+                  selectedDropdownValue={selectedDropdownValue}
+                  setSelectedDropdownValue={setSelectedDropdownValue}
+                />
+              }
+              className={classes.wrapper}
+              contentClassName={classes.contentClassName}
+            >
+              <ResponsiveTable
+                tableHeader={staffDashboardTableHeader}
+                data={staffDashboardTableBody}
+              />
+            </Wrapper>
+          </Col>
+          )}
         </Row>
           </div>
         </div>

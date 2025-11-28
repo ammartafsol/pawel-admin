@@ -94,3 +94,7 @@ line-height: normal;
     gap: 8px;
     margin-top: 4px;
 }
+
+.contentClassName {
+    padding: 0px !important;
+}
