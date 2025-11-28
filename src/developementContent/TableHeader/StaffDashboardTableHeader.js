@@ -29,6 +29,16 @@ export const staffDashboardTableHeader = [
       );
     },
   },
+   {
+    title: "Internal Deadline",
+    key: "internaldeadline",
+    style: { width: "15%" },
+  },
+   {
+    title: "Office Deadline",
+    key: "officedeadline",
+    style: { width: "15%" },
+  },
   {
     title: "Status",
     key: "status",
