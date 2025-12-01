@@ -10,7 +10,12 @@ import { useFormik } from "formik";
 import useAxios from "@/interceptor/axios-functions";
 import RenderToast from "@/components/atoms/RenderToast";
 import { useRouter } from "next/navigation";
-import { getEmailCookie, getCodeCookie, removeEmailCookie, removeCodeCookie } from "@/resources/utils/cookie";
+import {
+  getEmailCookie,
+  getCodeCookie,
+  removeEmailCookie,
+  removeCodeCookie,
+} from "@/resources/utils/cookie";
 
 const ResetPasswordTemplate = () => {
   const [loading, setLoading] = useState("");
@@ -26,7 +31,8 @@ const ResetPasswordTemplate = () => {
     if (!emailFromCookie || !codeFromCookie) {
       RenderToast({
         type: "error",
-        message: "Session expired. Please start the password reset process again.",
+        message:
+          "Session expired. Please start the password reset process again.",
       });
       router.push("/forgot-password");
     }
@@ -44,7 +50,8 @@ const ResetPasswordTemplate = () => {
     if (!emailFromCookie || !codeFromCookie) {
       RenderToast({
         type: "error",
-        message: "Session expired. Please start the password reset process again.",
+        message:
+          "Session expired. Please start the password reset process again.",
       });
       router.push("/forgot-password");
       return;
@@ -66,9 +73,9 @@ const ResetPasswordTemplate = () => {
 
     if (response?.status === "success") {
       // Clear cookies after successful password reset
+      RenderToast({ type: "success", message: "Password reset successfully" });
       removeEmailCookie();
       removeCodeCookie();
-      RenderToast({ type: "success", message: "Password reset successfully" });
       router.push("/login");
       setLoading("");
       return;
@@ -98,7 +105,9 @@ const ResetPasswordTemplate = () => {
             setValue={(e) => {
               formik.setFieldValue("confirmPassword", e);
             }}
-            error={formik.touched.confirmPassword && formik.errors.confirmPassword}
+            error={
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+            }
             value={formik.values.confirmPassword}
             label="Confirm Password"
             placeholder="Confirm your new password"
@@ -123,4 +132,3 @@ const ResetPasswordTemplate = () => {
 };
 
 export default ResetPasswordTemplate;
-

@@ -50,6 +50,7 @@ const DropDown = ({
   labelClassName,
   errorClassName,
   containerClassName,
+  selectedValueColor = "var(--steel-mist)",
   ...props
 }) => {
 
@@ -83,7 +84,10 @@ const DropDown = ({
         </label>
       )}
 
-      <div className={centeredLabel ? classes.selectWrapper : ""}>
+      <div 
+        className={centeredLabel ? classes.selectWrapper : ""}
+        style={{ "--selected-value-color": selectedValueColor }}
+      >
         <Select
         values={values}
         options={options}

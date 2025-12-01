@@ -27,56 +27,26 @@ const LoginTemplate = () => {
       handleSubmit(values);
     },
   });
-  // const handleSubmit = async(values) => {
-  //   setLoading("loading");
-  //   const obj = { email: values?.email, password: values?.password };
-  //   const { response } = await Post({ route: "auth/login", data: obj });
-  // if(response){
-  //   const token = response?.data?.token;
-  //   const user = response?.data?.user;
-  //   dispatch(saveLoginUserData(response?.data));
-  //   setTokenCookie(token);
-  //   setUserMetadataCookie(user);
-  //   RenderToast({
-  //     type: "info",
-  //     message: "Please complete your profile to continue",
-  //   });
-  //   router.push("/sign-up");
-  //   return;
-  // }
-  // };
   const handleSubmit = async(values) => {
     setLoading("loading");
-    
-    // Dummy email logic - redirect based on email
-    const email = values?.email?.toLowerCase() || "";
-    
-    // Check if email contains "staff" or is a staff dummy email
-    if (email.includes("admin")) {
-      // Redirect to staff dashboard
-      router.push("/");
-    } 
- 
-    
-    setLoading("");
-    
-    // API call commented out for now
-    // const obj = { email: values?.email, password: values?.password };
-    // const { response } = await Post({ route: "auth/login", data: obj });
-    // if(response){
-    //   const token = response?.data?.token;
-    //   const user = response?.data?.user;
-    //   dispatch(saveLoginUserData(response?.data));
-    //   setTokenCookie(token);
-    //   setUserMetadataCookie(user);
-    //   RenderToast({
-    //     type: "info",
-    //     message: "Please complete your profile to continue",
-    //   });
-    //   router.push("/sign-up");
-    //   return;
-    // }
+    const obj = { email: values?.email, password: values?.password };
+    const { response } = await Post({ route: "auth/admin/login", data: obj });
+  if(response){
+    const token = response?.data?.token;
+    const user = response?.data?.user;
+    console.log("myuserdata", user);
+    dispatch(saveLoginUserData(response?.data));
+    setTokenCookie(token);
+    setUserMetadataCookie(user);
+    RenderToast({
+      type: "success",
+      message: "Login successful",
+    });
+    router.push("/");
+    return;
+  }
   };
+
   return (
     <AuthWrapper
       title="Login to your account"
@@ -88,14 +58,15 @@ const LoginTemplate = () => {
           <Input type="password" setValue={(e)=>{formik.setFieldValue("password", e)}} error={formik.touched.password && formik.errors.password} value={formik.values.password} label="Password" placeholder="Enter your password" />
         <div className={classes.buttonContainer}> 
           <div className={classes.forgotPasswordContainer}>
-            <Checkbox checked={formik.values.checkbox} error={formik.touched.checkbox && formik.errors.checkbox} onChange={(e)=>{formik.setFieldValue("checkbox", e)}} label="Keep me logged in" />
+            <Checkbox checked={formik.values.checkbox}  onChange={(e)=>{formik.setFieldValue("checkbox", e)}} label="Keep me logged in" />
             <div onClick={()=>{router.push("/forgot-password")}} className={classes.forgotPassword}>Forgot password?</div>
           </div>
           <Button
             variant="primary"
             onClick={()=>{formik.handleSubmit()}}
-            label="Sign In"
+            label={loading === "loading" ? "Please wait..." : "Sign In"}
             className={classes.loginButton}
+            disabled={loading === "loading"}
           />
         </div>
         </div>

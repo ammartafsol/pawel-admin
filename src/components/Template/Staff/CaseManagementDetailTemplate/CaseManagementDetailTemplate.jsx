@@ -223,7 +223,7 @@ const CaseManagementDetailTemplate = ({ slug }) => {
       >
         <div className={classes?.content}>
           <Row>
-            <Col md={3}>
+            <Col md={4}>
               <CaseProgressCard
                 data={{
                   tabLabel: "EU TM OPPO",
@@ -248,7 +248,7 @@ const CaseManagementDetailTemplate = ({ slug }) => {
                 isCaseDetailVariant
               />
             </Col>
-            <Col md={9}>
+            <Col md={8}>
               <Wrapper
                 headerComponent={
                   <EvidenceTableTop

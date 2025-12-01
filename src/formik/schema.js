@@ -4,14 +4,8 @@ import * as Yup from "yup";
 export const LoginSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
-    .required("Email is required")
-    .test(
-      "no-special-chars",
-      "Email contains invalid characters",
-      (value) => !value || emailRegex.test(value)
-    ),
+    .required("Email is required"),
   password: Yup.string().required("Password is required"),
-  checkbox: Yup.boolean().oneOf([true], "Checkbox is required"),
 });
 
 export const ForgotPasswordSchema = Yup.object({

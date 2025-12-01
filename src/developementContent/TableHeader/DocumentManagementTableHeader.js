@@ -10,12 +10,12 @@ export const documentManagementTableHeader = [
     style: { width: "20%" },
   },
   {
-    title: "Document name",
+    title: "Document Name",
     key: "documentName",
     style: { width: "25%" },
   },
   {
-    title: "Trade Mark no.",
+    title: "Trade Mark No.",
     key: "tradeMarkNo",
     style: { width: "20%" },
   },
