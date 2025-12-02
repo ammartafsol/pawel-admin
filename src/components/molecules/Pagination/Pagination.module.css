@@ -25,13 +25,13 @@
 }
 
 .pageButton {
-  color: #7a7a7a;
+  color: var(--charcoal-gray);
   font-size: 14px;
   font-weight: 400;
   display: flex;
-  min-width: 40px;
-  height: 40px;
-  padding: 8px 12px;
+  min-width: 30px;
+  height: 30px;
+  padding: 2px 12px;
   justify-content: center;
   align-items: center;
   border-radius: 6px;
@@ -59,15 +59,15 @@
 
 .arrowButton {
   display: flex;
-  width: 40px;
-  height: 40px;
-  padding: 8px;
+  width: 28px;
+  height: 28px;
+  padding: 2px;
   justify-content: center;
   align-items: center;
   border-radius: 6px;
   border: 1px solid #e0e0e0;
   background: #fff;
-  color: #333;
+  color: var(--midnight-blue);
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
