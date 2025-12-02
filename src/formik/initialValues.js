@@ -58,3 +58,10 @@ export const createJurisdictionFormValues = {
   description: "",
   isActive: true,
 };
+
+export const createCaseTypeFormValues = {
+  caseTypeName: "",
+  jurisdiction: "",
+  phases: [{ name: "", order: 1 }],
+  isActive: true,
+};

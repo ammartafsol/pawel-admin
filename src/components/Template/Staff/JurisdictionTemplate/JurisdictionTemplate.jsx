@@ -99,11 +99,11 @@ const JurisdictionTemplate = () => {
   //   return headers;
   // }, [selectedTab]);
 
-  const getJurisdictionData = async ({_status}) => {
+  const getJurisdictionData = async ({_status, _page}) => {
     setLoading("loading");
     const query = {
       search: debouncedSearch,
-      page: page || 1,
+      page: _page || page || 1,
       limit: RECORDS_LIMIT,
       status: _status || "",
     }
@@ -153,8 +153,8 @@ const JurisdictionTemplate = () => {
 
 
   useEffect(()=>{
-    getJurisdictionData({_status: status});
-  },[debouncedSearch, status, page]);
+    getJurisdictionData({_status: status,_page:1});
+  },[debouncedSearch, status]);
 
 
 
@@ -166,7 +166,7 @@ const JurisdictionTemplate = () => {
             title="Jurisdiction Management"
             titleIcon={<GoLaw color="#D9D9D9" size={28} />}
             searchValue={searchValue}
-            onSearchChange={setSearchValue}
+            onSearchChange={(value)=>{setPage(1);setSearchValue(value);}}
             searchPlaceholder="Search..."
             onFilterClick={handleFilterClick}
             filterOptions={filterOptions}
@@ -181,6 +181,12 @@ const JurisdictionTemplate = () => {
         <ResponsiveTable
           tableHeader={jurisdictionTableHeader}
           data={data}
+          pagination={true}
+          page={page}
+          totalRecords={totalRecords}
+          onPageChange={(page)=>{setPage(page);
+            getJurisdictionData({_status: status,_page:page});
+          }}
         />
       </Wrapper>
       <AddNewStaffModal
@@ -192,6 +198,7 @@ const JurisdictionTemplate = () => {
         setShow={setShowAddNewJurisdictionModal}
         selectedData={selectedData}
         getJurisdictionData={getJurisdictionData}
+        
       />
       {
         loading === 'loading' && <CircularLoadingComponent />

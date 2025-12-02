@@ -1,0 +1,80 @@
+.footerDiv {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dropdownContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    color: var(--midnight-blue, #151529);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.dropdown {
+    width: 100%;
+}
+
+.errorText {
+    color: var(--red);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.phasesContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.phasesList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.phaseItem {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid var(--tertiary-100, #E3E3ED);
+    border-radius: 8px;
+    background: var(--white, #ffffff);
+}
+
+.phaseInputs {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+}
+
+.removePhaseButton {
+    align-self: flex-start;
+    min-width: auto;
+    padding: 8px 12px;
+}
+
+.addPhaseButton {
+    align-self: flex-start;
+    min-width: auto;
+}
+
+@media (max-width: 768px) {
+    .phaseInputs {
+        grid-template-columns: 1fr;
+    }
+}
+

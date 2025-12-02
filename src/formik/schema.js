@@ -74,3 +74,17 @@ export const CreateJurisdictionSchema = Yup.object({
   description: Yup.string(),
   isActive: Yup.boolean(),
 });
+
+export const CreateCaseTypeSchema = Yup.object({
+  caseTypeName: Yup.string().required("Case Type Name is required"),
+  jurisdiction: Yup.string().required("Jurisdiction is required"),
+  phases: Yup.array()
+    .min(1, "At least one phase is required")
+    .of(
+      Yup.object({
+        name: Yup.string().required("Phase name is required"),
+        order: Yup.number().required("Phase order is required").min(1),
+      })
+    ),
+  isActive: Yup.boolean(),
+});

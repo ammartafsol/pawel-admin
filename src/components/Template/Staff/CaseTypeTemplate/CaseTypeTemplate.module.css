@@ -1,0 +1,90 @@
+.contentClassName {
+    padding: 0px !important;
+}
+
+.viewDetailsLink {
+    text-decoration: underline;
+    color: inherit;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.viewDetailsLink:hover {
+    color: var(--sky-glow);
+}
+
+.phasesContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.phasesCount {
+    color: var(--midnight-blue, #151529);
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.phasesCount:hover {
+    color: var(--sky-glow);
+}
+
+.phasesTooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    margin-bottom: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.phasesContainer:hover .phasesTooltip {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.phasesTooltipContent {
+    background: var(--white, #ffffff);
+    border: 1px solid var(--tertiary-100, #E3E3ED);
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    min-width: 250px;
+    max-width: 400px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.phaseItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--tertiary-100, #E3E3ED);
+}
+
+.phaseItem:last-child {
+    border-bottom: none;
+}
+
+.phaseOrder {
+    color: var(--midnight-blue, #151529);
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 20px;
+}
+
+.phaseName {
+    color: var(--midnight-blue, #151529);
+    font-size: 14px;
+    font-weight: 400;
+    flex: 1;
+    word-break: break-word;
+}
+
