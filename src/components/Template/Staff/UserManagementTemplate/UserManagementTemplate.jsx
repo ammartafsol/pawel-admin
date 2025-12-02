@@ -18,6 +18,7 @@ const UserManagementTemplate = () => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedTab, setSelectedTab] = useState('staff');
   const [showAddNewStaffModal, setShowAddNewStaffModal] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleFilterClick = () => {
     // Filter functionality can be implemented here
@@ -146,6 +147,10 @@ const UserManagementTemplate = () => {
         <ResponsiveTable
           tableHeader={tableHeaders}
           data={userManagementTableBody}
+          pagination
+          totalRecords={714}
+          page={currentPage}
+          onPageChange={setCurrentPage}
         />
       </Wrapper>
       <AddNewStaffModal  show={showAddNewStaffModal} setShow={setShowAddNewStaffModal} />
