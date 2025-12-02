@@ -94,11 +94,11 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .paginationContainer {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
+.paginationContainer {
+  padding: 12px 8px;
+  height: 45px;
+  box-sizing: border-box;
+}
 
   .resultsText {
     font-size: 12px;
@@ -111,21 +111,38 @@
 
   .pageButton,
   .arrowButton {
-    min-width: 36px;
-    height: 36px;
-    font-size: 12px;
+    min-width: 28px;
+    height: 28px;
   }
 }
 
 @media (max-width: 480px) {
   .paginationButtons {
-    gap: 2px;
+    gap: 3px;
   }
 
-  .pageButton,
-  .arrowButton {
-    min-width: 32px;
-    height: 32px;
-    padding: 4px 8px;
+  .pageButton{
+   min-width: 27px;
+    height: 27px;
+    padding: 2px 6px;
   }
+
+  .arrowButton {
+    min-width: 25px;
+    height: 25px;
+    padding: 2px 5px;
+  }
+}
+
+@media (max-width: 375px) {
+  .paginationContainer {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .paginationContainer {
+  height: max-content;
+  padding: 4px 16px;
+}
+
 }
