@@ -46,10 +46,10 @@ const TableHeader = ({
     };
   }, [isFilterOverlayOpen]);
 
-  const handleFilterIconClick = () => {
+  const handleFilterIconClick = (e) => {
     setIsFilterOverlayOpen(!isFilterOverlayOpen);
     if (onFilterClick) {
-      onFilterClick();
+      onFilterClick(e);
     }
   };
 

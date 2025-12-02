@@ -20,51 +20,57 @@ import SpinnerLoading from "@/components/atoms/SpinnerLoading/SpinnerLoading";
 import CircularLoadingComponent from "@/components/atoms/CircularLoadingComponent/CircularLoadingComponent";
 import { jurisdictionTableHeader } from "@/developementContent/TableHeader/juridiction";
 import Status from "@/components/atoms/Status/Status";
+import useDebounce from "@/resources/hooks/useDebounce";
+import { RECORDS_LIMIT } from "@/resources/utils/constant";
 
 
 
 const JurisdictionTemplate = () => {
-  const [searchValue, setSearchValue] = useState("");
   const [selectedTab, setSelectedTab] = useState("staff");
   const [showAddNewStaffModal, setShowAddNewStaffModal] = useState(false);
   const [totalRecords, setTotalRecords] = useState(0);
   const [selectedData,setSelectedData] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [status, setStatus] = useState("");
+  const [page, setPage] = useState(1);
   const [showAddNewJurisdictionModal, setShowAddNewJurisdictionModal] =
-    useState(false);
+    useState(false);  
+  const debouncedSearch = useDebounce(searchValue, 500);
   const [loading, setLoading] = useState("");
   const [data, setData] = useState([]);
   const { Get } = useAxios();
 
-  const handleFilterClick = () => {
+  const handleFilterClick = (e) => {
     // Filter functionality can be implemented here
-    console.log("Filter clicked");
   };
 
   const filterOptions = [
     {
-      label: "All Users",
+      label: "All",
+      value: "",
       onClick: () => {
-        console.log("Filter: All Users");
+        setStatus("");
+        setPage(1);
       },
     },
     {
-      label: "Active Users",
+      label: "Active",
+      value: "active",
       onClick: () => {
-        console.log("Filter: Active Users");
+        setStatus("active");
+        setPage(1);
       },
     },
+   
     {
-      label: "Inactive Users",
+      label: "Inactive",
+      value: "inactive",
       onClick: () => {
-        console.log("Filter: Inactive Users");
+        setStatus("inactive");
+        setPage(1);
       },
     },
-    {
-      label: "Pending Cases",
-      onClick: () => {
-        console.log("Filter: Pending Approval");
-      },
-    },
+   
   ];
 
   // const tableHeaders = useMemo(() => {
@@ -93,10 +99,16 @@ const JurisdictionTemplate = () => {
   //   return headers;
   // }, [selectedTab]);
 
-  const getJurisdictionData = async () => {
+  const getJurisdictionData = async ({_status}) => {
     setLoading("loading");
-    const { response } = await Get({ route: "admin/jurisdiction/all" });
-    console.log("response", response);
+    const query = {
+      search: debouncedSearch,
+      page: page || 1,
+      limit: RECORDS_LIMIT,
+      status: _status || "",
+    }
+    const queryString = new URLSearchParams(query).toString();
+    const { response } = await Get({ route: `admin/jurisdiction/all?${queryString}` });
     if (response) {
       setTotalRecords(response?.totalRecords);
       setData(response?.data);
@@ -139,12 +151,10 @@ const JurisdictionTemplate = () => {
   ];
 
 
+
   useEffect(()=>{
-    getJurisdictionData();
-  },[]);
-
-
-  console.log("selectedData",selectedData);
+    getJurisdictionData({_status: status});
+  },[debouncedSearch, status, page]);
 
 
 
