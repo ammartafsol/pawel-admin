@@ -22,7 +22,7 @@
   background-color: var(--white);
   outline: none;
   border: 1px solid var(--silver-gray);
-  border-radius: 6px;
+  border-radius: 12px;
   height: 100px;
   padding: 12px;
 }

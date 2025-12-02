@@ -68,3 +68,9 @@ export const AddNewStaffSchema = Yup.object({
     .min(1, "At least one permission is required")
     .required("Permissions are required"),
 });
+
+export const CreateJurisdictionSchema = Yup.object({
+  jurisdictionName: Yup.string().required("Jurisdiction Name is required"),
+  description: Yup.string(),
+  isActive: Yup.boolean(),
+});

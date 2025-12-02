@@ -1,0 +1,64 @@
+.contentClassName {
+    padding: 0px !important;
+}
+
+.viewDetailsLink {
+    text-decoration: underline;
+    color: inherit;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.viewDetailsLink:hover {
+    color: var(--sky-glow);
+}
+
+.tabBtnContainer{
+display: flex;
+height: 64px;
+justify-content: space-between;
+align-items: center;
+flex-shrink: 0;
+border-bottom: 1px solid var(--ghost-white, #F0F0F5);
+
+}
+
+.viewAllBtn{
+    height: 40px !important;
+    width: fit-content !important;
+    white-space: nowrap;
+}
+
+.permissionsContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.permissionsText {
+    color: var(--midnight-blue, #151529);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.permissionsBadge {
+    display: flex;
+    width: 28px;
+    height: 28px;
+    padding: 12px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 999px;
+    border: 1.5px solid var(--tertiary-100, #E3E3ED);
+    background: #F1FFFE;
+    color: var(--turquoise-wave, #33c8c2);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+
+

@@ -52,3 +52,9 @@ export const addNewStaffFormValues = {
   email: "",
   permissions: [],
 };
+
+export const createJurisdictionFormValues = {
+  jurisdictionName: "",
+  description: "",
+  isActive: true,
+};
