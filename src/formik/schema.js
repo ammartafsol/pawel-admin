@@ -40,8 +40,8 @@ export const CreateNewCaseSchema = Yup.object({
       title: Yup.string().required("Deadline title is required"),
     })
   ),
-  primaryStaff: Yup.string(),
-  secondaryStaff: Yup.string(),
+  primaryStaff: Yup.string().required("Primary staff is required"),
+  secondaryStaff: Yup.string().required("Secondary staff is required"),
 });
 
 export const AddNoteSchema = Yup.object({

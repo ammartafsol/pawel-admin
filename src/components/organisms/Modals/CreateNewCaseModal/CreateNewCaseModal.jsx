@@ -19,7 +19,12 @@ import { createNewCaseFormValues } from "@/formik/initialValues";
 import { auditTrackingOptions } from "@/developementContent/Enums/enum";
 
 const CreateNewCaseModal = ({ show, setShow }) => {
-  const staffOptions = []; // Empty array for now - API call commented out
+  const staffOptions = [
+    { label: "John Doe", value: "john_doe" },
+    { label: "Jane Smith", value: "jane_smith" },
+    { label: "Alex Johnson", value: "alex_johnson" },
+    { label: "Maria Garcia", value: "maria_garcia" },
+  ];
   const formik = useFormik({
     initialValues: createNewCaseFormValues,
     validationSchema: CreateNewCaseSchema,
@@ -149,7 +154,7 @@ const CreateNewCaseModal = ({ show, setShow }) => {
           >
             <div className={classes?.deadlineContainer}>
               {formik.values.deadlines.map((deadline, index) => (
-                <div key={`deadline-${index}-${deadline.date || deadline.title || index}`} className={classes.deadlineItem}>
+                <div key={index} className={classes.deadlineItem}>
                   <Input 
                     type="date" 
                     className={classes?.input}
@@ -210,11 +215,12 @@ const CreateNewCaseModal = ({ show, setShow }) => {
                     closeOnSelect={true}
                     searchable={true}
                     rightIcon={<IoSearchSharp size={20} />}
-                    error={formik.touched.primaryStaff && formik.errors.primaryStaff ? formik.errors.primaryStaff : undefined}
+                    error={formik.errors.primaryStaff}
                     onChange={(value) => {
                       const selectedValue =
                         value && value.length > 0 ? value[0]?.value : "";
                       formik.setFieldValue("primaryStaff", selectedValue);
+                      formik.setFieldTouched("primaryStaff", true, false);
                     }}
                   />
                 </div>
@@ -234,11 +240,12 @@ const CreateNewCaseModal = ({ show, setShow }) => {
                     closeOnSelect={true}
                     searchable={true}
                     rightIcon={<IoSearchSharp size={20} />}
-                    error={formik.touched.secondaryStaff && formik.errors.secondaryStaff ? formik.errors.secondaryStaff : undefined}
+                    error={formik.errors.secondaryStaff}
                     onChange={(value) => {
                       const selectedValue =
                         value && value.length > 0 ? value[0]?.value : "";
                       formik.setFieldValue("secondaryStaff", selectedValue);
+                      formik.setFieldTouched("secondaryStaff", true, false);
                     }}
                   />
                 </div>
