@@ -41,10 +41,10 @@
 }
 
 .error {
-  color: var(--error);
-  font-size: 14px;
+  color: red !important;
+  font-size: 12px;
   font-weight: 400;
-  margin: 0;
+  margin: 4px 0 0 0;
   line-height: 1.4;
 }
 
@@ -58,4 +58,20 @@
 
 .dropdownHandleIcon {
   transition: all 0.2s ease-in-out;
+}
+
+.dropdownWithRightIcon {
+  position: relative;
+}
+
+.rightIconContainer {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

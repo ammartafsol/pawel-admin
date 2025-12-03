@@ -79,3 +79,16 @@
     font-size: 12px;
     margin-top: 4px;
 }
+
+.dropdownWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.staffLabel {
+    color: var(--midnight-blue, #151529);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: normal;
+}

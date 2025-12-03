@@ -19,6 +19,7 @@ import { createNewCaseFormValues } from "@/formik/initialValues";
 import { auditTrackingOptions } from "@/developementContent/Enums/enum";
 
 const CreateNewCaseModal = ({ show, setShow }) => {
+  const staffOptions = []; // Empty array for now - API call commented out
   const formik = useFormik({
     initialValues: createNewCaseFormValues,
     validationSchema: CreateNewCaseSchema,
@@ -48,6 +49,7 @@ const CreateNewCaseModal = ({ show, setShow }) => {
     newDeadlines[index] = { ...newDeadlines[index], [field]: value };
     formik.setFieldValue("deadlines", newDeadlines);
   };
+
   return (
     <div>
       <ModalSkeleton
@@ -86,14 +88,12 @@ const CreateNewCaseModal = ({ show, setShow }) => {
               values={formik.values.caseType ? auditTrackingOptions.filter(opt => opt.value === formik.values.caseType) : []}
               className={classes.dropdown}
               closeOnSelect={true}
+              error={formik.touched.caseType && formik.errors.caseType ? formik.errors.caseType : undefined}
               onChange={(value) => {
                 const selectedValue = value && value.length > 0 ? value[0]?.value : "";
                 formik.setFieldValue("caseType", selectedValue);
               }}
             />
-            {formik.touched.caseType && formik.errors.caseType && (
-              <div className={classes.errorText}>{formik.errors.caseType}</div>
-            )}
           </IconInput>
           <IconInput icon={<FaUser size={22} />} title="Client Name">
             <Input
@@ -135,14 +135,12 @@ const CreateNewCaseModal = ({ show, setShow }) => {
                 values={formik.values.jurisdiction ? auditTrackingOptions.filter(opt => opt.value === formik.values.jurisdiction) : []}
                 className={classes.dropdown}
                 closeOnSelect={true}
+                error={formik.touched.jurisdiction && formik.errors.jurisdiction ? formik.errors.jurisdiction : undefined}
                 onChange={(value) => {
                   const selectedValue = value && value.length > 0 ? value[0]?.value : "";
                   formik.setFieldValue("jurisdiction", selectedValue);
                 }}
               />
-            {formik.touched.jurisdiction && formik.errors.jurisdiction && (
-              <div className={classes.errorText}>{formik.errors.jurisdiction}</div>
-            )}
           </IconInput>
           <IconInput
             icon={<IoCalendarClearOutline size={22} />}
@@ -196,26 +194,54 @@ const CreateNewCaseModal = ({ show, setShow }) => {
               className={classes?.iconParent}
             >
               <div className={classes?.deadlineContainer}>
-                <Input
-                  placeholder="Type to search"
-                  className={classes?.input}
-                  label="Primary"
-                  inputClass={classes?.inputClassName}
-                  type="search"
-                  rightIcon={<IoSearchSharp size={20} />}
-                  value={formik.values.primaryStaff}
-                  setValue={(value) => formik.setFieldValue("primaryStaff", value)}
-                />
-                <Input
-                  placeholder="Type to search"
-                  className={classes?.input}
-                  label="Secondary"
-                  inputClass={classes?.inputClassName}
-                  type="search"
-                  rightIcon={<IoSearchSharp size={20} />}
-                  value={formik.values.secondaryStaff}
-                  setValue={(value) => formik.setFieldValue("secondaryStaff", value)}
-                />
+                <div className={classes.dropdownWrapper}>
+                  <label className={classes.staffLabel} htmlFor="primary-staff-dropdown">Primary</label>
+                  <DropDown
+                    options={staffOptions}
+                    placeholder="Select Primary Staff"
+                    values={
+                      formik.values.primaryStaff
+                        ? staffOptions.filter(
+                            (opt) => opt.value === formik.values.primaryStaff
+                          )
+                        : []
+                    }
+                    className={classes.dropdown}
+                    closeOnSelect={true}
+                    searchable={true}
+                    rightIcon={<IoSearchSharp size={20} />}
+                    error={formik.touched.primaryStaff && formik.errors.primaryStaff ? formik.errors.primaryStaff : undefined}
+                    onChange={(value) => {
+                      const selectedValue =
+                        value && value.length > 0 ? value[0]?.value : "";
+                      formik.setFieldValue("primaryStaff", selectedValue);
+                    }}
+                  />
+                </div>
+                <div className={classes.dropdownWrapper}>
+                  <label className={classes.staffLabel} htmlFor="secondary-staff-dropdown">Secondary</label>
+                  <DropDown
+                    options={staffOptions}
+                    placeholder="Select Secondary Staff"
+                    values={
+                      formik.values.secondaryStaff
+                        ? staffOptions.filter(
+                            (opt) => opt.value === formik.values.secondaryStaff
+                          )
+                        : []
+                    }
+                    className={classes.dropdown}
+                    closeOnSelect={true}
+                    searchable={true}
+                    rightIcon={<IoSearchSharp size={20} />}
+                    error={formik.touched.secondaryStaff && formik.errors.secondaryStaff ? formik.errors.secondaryStaff : undefined}
+                    onChange={(value) => {
+                      const selectedValue =
+                        value && value.length > 0 ? value[0]?.value : "";
+                      formik.setFieldValue("secondaryStaff", selectedValue);
+                    }}
+                  />
+                </div>
               </div>
             </IconInput>
           </div>

@@ -51,10 +51,15 @@ const DropDown = ({
   errorClassName,
   containerClassName,
   selectedValueColor = "var(--steel-mist)",
+  rightIcon,
   ...props
 }) => {
 
   const dropdownHandleRenderer = ({ props, state, methods }) => {
+    // Hide dropdown handle if rightIcon is provided
+    if (rightIcon) {
+      return null;
+    }
     console.log(state);
     return (
       <div className={classes.dropdownHandle}>
@@ -85,7 +90,7 @@ const DropDown = ({
       )}
 
       <div 
-        className={centeredLabel ? classes.selectWrapper : ""}
+        className={`${centeredLabel ? classes.selectWrapper : ""} ${rightIcon ? classes.dropdownWithRightIcon : ""}`}
         style={{ "--selected-value-color": selectedValueColor }}
       >
         <Select
@@ -124,10 +129,15 @@ const DropDown = ({
         dropdownHandleRenderer={dropdownHandleRenderer}
         {...props}
       />
+      {rightIcon && (
+        <div className={classes.rightIconContainer}>
+          {rightIcon}
+        </div>
+      )}
       </div>
 
       {error && (
-        <p className={`${classes.error} ${errorClassName || ""}`}>{error}</p>
+        <p style={{color: "var(--error)"}} className={`*${classes.error} ${errorClassName}`}>{error}</p>
       )}
     </div>
   );

@@ -137,7 +137,7 @@
 }
 
 .react-dropdown-select .react-dropdown-select-option-remove:hover {
-    color: var(--error) !important;
+    /* color: var(--error) !important; */
 }
 
 /* Dropdown Handle */
@@ -153,6 +153,8 @@
     transform: rotate(180deg) !important;
 }
 
+/* Hide dropdown handle when rightIcon is present - handled in component */
+
 /* Loading State */
 .react-dropdown-select .react-dropdown-select-loading {
     color: var(--sky-glow, #62c1f8) !important;
@@ -165,9 +167,9 @@
     transition: color 0.2s ease !important;
 }
 
-.react-dropdown-select .react-dropdown-select-clear:hover {
+/* .react-dropdown-select .react-dropdown-select-clear:hover {
     color: var(--error) !important;
-}
+} */
 
 /* Scrollbar Styling */
 .react-dropdown-select .react-dropdown-select-dropdown::-webkit-scrollbar {
