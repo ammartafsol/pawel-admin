@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import classes from "./CaseManagementTemplate.module.css"
 import Wrapper from '@/components/atoms/Wrapper/Wrapper';
 import TableHeader from '@/components/molecules/TableHeader/TableHeader';
-import { reactActivities } from '@/developementContent/Enums/enum';
+import { caseStatusFilters, reactActivities } from '@/developementContent/Enums/enum';
 import { FaRegFolderClosed } from "react-icons/fa6";
 import CaseProgressCard from '@/components/molecules/CaseProgressCard/CaseProgressCard';
 import { Col, Row } from "react-bootstrap";
@@ -14,7 +14,7 @@ import useAxios from '@/interceptor/axios-functions';
 
 const CaseManagementTemplate = () => {
   const [showCreateNewCaseModal, setShowCreateNewCaseModal] = useState(false);
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState(reactActivities[0]);
+  const [selectedDropdownValue, setSelectedDropdownValue] = useState(caseStatusFilters[0]);
   const [loading,setLoading] = useState('');
   const [page,setPage] = useState(1);
   const [totalRecords,setTotalRecords] = useState(0);
@@ -43,7 +43,7 @@ const CaseManagementTemplate = () => {
 
   return (
     <div className='p24'>
-      <Wrapper   headerComponent={<TableHeader viewButtonText='Create new case' searchValue={search} onSearchChange={setSearch} onClickViewAll={() => setShowCreateNewCaseModal(true)}  dropdownOptions={reactActivities}  selectedDropdownValue={selectedDropdownValue} setSelectedDropdownValue={setSelectedDropdownValue} title="Case Management" titleIcon={<FaRegFolderClosed color='#D9D9D9' size={20} />} />}>
+      <Wrapper   headerComponent={<TableHeader viewButtonText='Create new case' searchValue={search} onSearchChange={setSearch} onClickViewAll={() => setShowCreateNewCaseModal(true)}  dropdownOptions={caseStatusFilters}  selectedDropdownValue={selectedDropdownValue} setSelectedDropdownValue={setSelectedDropdownValue} title="Case Management" titleIcon={<FaRegFolderClosed color='#D9D9D9' size={20} />} />}>
       <div className={classes.caseManagementCards}>
         <Row className="g-4">
           {caseManagementCardsData.map((item) => (

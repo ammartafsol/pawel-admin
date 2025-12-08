@@ -242,7 +242,17 @@ const CaseManagementDetailTemplate = ({ slug }) => {
                     { label: "Second Observations", value: "Dec 20, 25" },
                     { label: "Decision", value: "Jan 20, 26" },
                   ],
-                  tasks: ['Evidence Round Opponent']
+                  tasks: ['Evidence Round Opponent'],
+                  officeDeadline: "2024-11-20",
+                  internalDeadline: "2024-11-23",
+                  reference: {
+                    referenceName: "My Web",
+                    link: "#",
+                    refrenece: [
+                      { label: "Reference 1", value: "Reference 1" },
+                      { label: "Reference 2", value: "Reference 2" },
+                    ]
+                  },
                 }}
                 // isAssignedStaffVariant
                 isCaseDetailVariant
