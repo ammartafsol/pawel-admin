@@ -28,23 +28,28 @@ const LoginTemplate = () => {
     },
   });
   const handleSubmit = async(values) => {
-    setLoading("loading");
-    const obj = { email: values?.email, password: values?.password };
-    const { response } = await Post({ route: "auth/admin/login", data: obj });
-  if(response){
-    const token = response?.data?.token;
-    const user = response?.data?.user;
-    console.log("myuserdata", user);
-    dispatch(saveLoginUserData(response?.data));
-    setTokenCookie(token);
-    setUserMetadataCookie(user);
-    RenderToast({
-      type: "success",
-      message: "Login successful",
-    });
-    router.push("/");
-    return;
-  }
+    if(values?.email?.includes("admin")){
+       RenderToast({type:"success", message:"Admin login is not allowed"});
+       router.push("/");
+       return;
+    }
+  //   setLoading("loading");
+  //   const obj = { email: values?.email, password: values?.password };
+  //   const { response } = await Post({ route: "auth/admin/login", data: obj });
+  // if(response){
+  //   const token = response?.data?.token;
+  //   const user = response?.data?.user;
+  //   console.log("myuserdata", user);
+  //   dispatch(saveLoginUserData(response?.data));
+  //   setTokenCookie(token);
+  //   setUserMetadataCookie(user);
+  //   RenderToast({
+  //     type: "success",
+  //     message: "Login successful",
+  //   });
+  //   router.push("/");
+  //   return;
+  // }
   };
 
   return (
