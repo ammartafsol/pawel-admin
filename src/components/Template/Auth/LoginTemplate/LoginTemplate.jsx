@@ -33,6 +33,11 @@ const LoginTemplate = () => {
        router.push("/");
        return;
     }
+    else{
+      RenderToast({type:"error", message:"Invalid email or password"});
+      return;
+    }
+
   //   setLoading("loading");
   //   const obj = { email: values?.email, password: values?.password };
   //   const { response } = await Post({ route: "auth/admin/login", data: obj });
