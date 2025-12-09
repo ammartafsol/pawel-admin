@@ -28,7 +28,6 @@ const staffOptions = [
 ];
 
 const CreateNewCaseModal = ({ show, setShow }) => {
-    { label: "John Doe", value: "john_doe" },
   const formik = useFormik({
     initialValues: createNewCaseFormValues,
     validationSchema: CreateNewCaseSchema,
