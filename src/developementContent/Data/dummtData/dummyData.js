@@ -112,7 +112,6 @@ export const newCasesData = [
   },
 ];
 
-
 export const caseManagementCardsData = [
   {
     id: 1,
@@ -123,7 +122,7 @@ export const caseManagementCardsData = [
     trademarkName: "A and Sons",
     trademarkNo: "R-3526",
     deadline: "Nov 20, 24",
-    clientName: "Dana Auer"
+    clientName: "Dana Auer",
   },
   {
     id: 2,
@@ -134,7 +133,7 @@ export const caseManagementCardsData = [
     trademarkName: "Orn-Runol",
     trademarkNo: "R-3526",
     deadline: "Nov 22, 24",
-    clientName: "Rafael Dietrich"
+    clientName: "Rafael Dietrich",
   },
   {
     id: 3,
@@ -145,7 +144,7 @@ export const caseManagementCardsData = [
     trademarkName: "Cummings, Reic...",
     trademarkNo: "R-3526",
     deadline: "Nov 25, 24",
-    clientName: "Al Cassin"
+    clientName: "Al Cassin",
   },
   {
     id: 4,
@@ -156,7 +155,7 @@ export const caseManagementCardsData = [
     trademarkName: "Heller - Hoppe",
     trademarkNo: "R-3526",
     deadline: "Nov 28, 24",
-    clientName: "Pete Orn"
+    clientName: "Pete Orn",
   },
   {
     id: 5,
@@ -167,7 +166,7 @@ export const caseManagementCardsData = [
     trademarkName: "Lueilwitz LLC",
     trademarkNo: "R-3526",
     deadline: "Dec 1, 24",
-    clientName: "Alberta Herman"
+    clientName: "Alberta Herman",
   },
   {
     id: 6,
@@ -178,6 +177,65 @@ export const caseManagementCardsData = [
     trademarkName: "Crist and Sons",
     trademarkNo: "R-3526",
     deadline: "Dec 5, 24",
-    clientName: "Kathleen Steuber"
-  }
+    clientName: "Kathleen Steuber",
+  },
 ];
+export const caseManagementDetailData = {
+  id: 1,
+  tabLabel: "EU TM OPPO",
+  userName: "Assigned Staff",
+  progress: 80,
+  status: "Decision",
+  trademarkName: "A and Sons",
+  trademarkNo: "R-3526",
+  referenceLink: "#",
+  primaryStaff: "Roxanne Gleichner",
+  secondaryStaff: "Roxanne Gleichner",
+  jurisdiction: "EUIPO",
+  clientName: "Dana Auer",
+  deadlines: [
+    { label: "Defense", value: "Nov 20, 25" },
+    { label: "Second Observations", value: "Dec 20, 25" },
+    { label: "Decision", value: "Jan 20, 26" },
+  ],
+  tasks: ["Evidence Round Opponent"],
+  officeDeadline: "2024-11-20",
+  internalDeadline: "2024-11-23",
+  reference: {
+    referenceName: "My Web",
+    link: "#",
+    reference: [
+      { label: "Reference 1", value: "Reference 1" },
+      { label: "Reference 2", value: "Reference 2" },
+    ],
+  },
+  activities: [
+    { text: "Status update to Defense", date: "May 1, 2025" },
+    {
+      text: "Status update to Evidence Round Opponent",
+      date: "May 15, 2025",
+    },
+    { text: "Document Upload", date: "May 15, 2025" },
+    { text: "Status update to Hearing", date: "May 17, 2025" },
+    { text: "Document Upload", date: "May 18, 2025" },
+  ],
+  documents: [
+    {
+      id: 1,
+      title: "Document 1",
+      dateTime: "12/29/2023 10:20",
+    },
+    {
+      id: 2,
+      title: "Document 2",
+      dateTime: "12/29/2023 10:20",
+      visibilityText: "Visible to client",
+    },
+    {
+      id: 3,
+      title: "Document 3",
+      dateTime: "12/29/2023 10:20",
+      visibilityText: "Visible to client",
+    },
+  ],
+};

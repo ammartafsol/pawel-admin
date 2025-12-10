@@ -1,12 +1,11 @@
-import UserManagementTemplate from '@/components/Template/Staff/UserManagementTemplate/UserManagementTemplate'
-import React from 'react'
+import UserManagementTemplate from "@/components/Template/Staff/UserManagementTemplate/UserManagementTemplate";
 
 const page = () => {
   return (
     <>
-        <UserManagementTemplate />
+      <UserManagementTemplate />
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;

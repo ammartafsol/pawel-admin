@@ -1,12 +1,11 @@
-import AuditTrackingTemplate from '@/components/Template/Staff/AuditTrackingTemplate/AuditTrackingTemplate'
-import React from 'react'
+import AuditTrackingTemplate from "@/components/Template/Staff/AuditTrackingTemplate/AuditTrackingTemplate";
 
 const page = () => {
   return (
     <>
-    <AuditTrackingTemplate />
+      <AuditTrackingTemplate />
     </>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -1,14 +1,14 @@
-import React from 'react'
-import Activity from '../../atoms/Activity/Activity'
-import classes from './ActivityLog.module.css'
+import React from "react";
+import Activity from "../../atoms/Activity/Activity";
+import classes from "./ActivityLog.module.css";
 
 const DEFAULT_ACTIVITIES = [
   { text: "Status update to Defense", date: "May 1, 2025" },
   { text: "Status update to Evidence Round Opponent", date: "May 15, 2025" },
-  { text: "Document Upload", date: "May 15, 2025" }
-]
+  { text: "Document Upload", date: "May 15, 2025" },
+];
 
-export default function ActivityLog({ activities = DEFAULT_ACTIVITIES }) {
+export default function ActivityLog({ activities }) {
   return (
     <div className={classes.activityLogContainer}>
       {activities.map((activity, index) => (
@@ -20,5 +20,5 @@ export default function ActivityLog({ activities = DEFAULT_ACTIVITIES }) {
         />
       ))}
     </div>
-  )
+  );
 }

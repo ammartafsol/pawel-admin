@@ -4,7 +4,11 @@ import classes from "./AuditTrackingTemplate.module.css";
 import { Col, Row } from "react-bootstrap";
 import Wrapper from "@/components/atoms/Wrapper/Wrapper";
 import CircularCaseProgressChart from "@/components/atoms/CircularCaseProgressChart/CircularCaseProgressChart";
-import { circularCaseProgressChartData, caseManagementCardsData, myEventsList } from "@/developementContent/Data/dummtData/dummyData";
+import {
+  circularCaseProgressChartData,
+  caseManagementCardsData,
+  myEventsList,
+} from "@/developementContent/Data/dummtData/dummyData";
 import CaseProgressCard from "@/components/molecules/CaseProgressCard/CaseProgressCard";
 import Calender from "@/components/molecules/Calender/Calender";
 import TableHeader from "@/components/molecules/TableHeader/TableHeader";
@@ -18,8 +22,10 @@ import { useRouter } from "next/navigation";
 const AuditTrackingTemplate = () => {
   const router = useRouter();
   const [searchValue, setSearchValue] = useState("");
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState(reactActivities[0]);
-  
+  const [selectedDropdownValue, setSelectedDropdownValue] = useState(
+    reactActivities[0]
+  );
+
   // Show only first 2 cards
   const overdueCases = caseManagementCardsData.slice(0, 2);
 
@@ -45,7 +51,7 @@ const AuditTrackingTemplate = () => {
               <Row className="g-4">
                 {overdueCases.map((item) => (
                   <Col className="col-12 col-md-6" key={item.id}>
-                    <CaseProgressCard 
+                    <CaseProgressCard
                       isStatusVariant
                       routePath={`/case-management/${item.id}`}
                       data={{
@@ -56,7 +62,7 @@ const AuditTrackingTemplate = () => {
                         trademarkName: item.trademarkName,
                         trademarkNo: item.trademarkNo,
                         deadline: item.deadline,
-                        clientName: item.clientName
+                        clientName: item.clientName,
                       }}
                     />
                   </Col>
@@ -66,7 +72,7 @@ const AuditTrackingTemplate = () => {
           </Wrapper>
         </Col>
         <Col sm={12}>
-        <Calender  events={myEventsList} />
+          <Calender events={myEventsList} />
         </Col>
       </Row>
       <Row className="mt-4">

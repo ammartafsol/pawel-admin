@@ -7,7 +7,7 @@ import { BiFilterAlt } from "react-icons/bi";
 import DropDown from "../DropDown/DropDown";
 import GridFilter from "../GridFilter/GridFilter";
 
-const TableHeader = ({ 
+const TableHeader = ({
   title,
   titleIcon,
   viewButtonText = "",
@@ -25,7 +25,7 @@ const TableHeader = ({
   gridFilter,
   activeGridFilter,
   setActiveGridFilter,
-  gridFilterClassName
+  gridFilterClassName,
 }) => {
   const [isFilterOverlayOpen, setIsFilterOverlayOpen] = useState(false);
   const filterRef = useRef(null);
@@ -58,8 +58,6 @@ const TableHeader = ({
     setIsFilterOverlayOpen(false);
   };
 
-
-
   return (
     <div className={classes?.tableHeaderParent}>
       <div className={classes?.tableHeaderDrop}>
@@ -77,13 +75,21 @@ const TableHeader = ({
         )}
         {dropdownOptions.length > 0 && (
           <div className={classes?.dropdownWrapper}>
-            <DropDown 
+            <DropDown
               options={dropdownOptions}
-              values={Array.isArray(selectedDropdownValue) ? selectedDropdownValue : (selectedDropdownValue ? [selectedDropdownValue] : [])}
+              values={
+                Array.isArray(selectedDropdownValue)
+                  ? selectedDropdownValue
+                  : selectedDropdownValue
+                  ? [selectedDropdownValue]
+                  : []
+              }
               onChange={(value) => {
                 if (setSelectedDropdownValue) {
                   // react-dropdown-select returns an array, extract first item for single select
-                  setSelectedDropdownValue(value && value.length > 0 ? value[0] : null);
+                  setSelectedDropdownValue(
+                    value && value.length > 0 ? value[0] : null
+                  );
                 }
               }}
               placeholder={dropdownPlaceholder}
@@ -93,15 +99,17 @@ const TableHeader = ({
             />
           </div>
         )}
-        <SearchInput 
+        <SearchInput
           placeholder={searchPlaceholder}
           value={searchValue}
           setValue={onSearchChange}
         />
         {(filterOptions.length > 0 || onFilterClick !== undefined) && (
           <div className={classes?.filterWrapper} ref={filterRef}>
-            <div 
-              className={`${classes?.filterIcon} ${isFilterOverlayOpen ? classes?.filterIconActive : ""}`} 
+            <div
+              className={`${classes?.filterIcon} ${
+                isFilterOverlayOpen ? classes?.filterIconActive : ""
+              }`}
               onClick={handleFilterIconClick}
             >
               <BiFilterAlt size={20} color="var(--black)" />
@@ -112,7 +120,9 @@ const TableHeader = ({
                   <div
                     key={index}
                     className={classes?.filterOption}
-                    onClick={() => handleFilterOptionClick(option.onClick || (() => {}))}
+                    onClick={() =>
+                      handleFilterOptionClick(option.onClick || (() => {}))
+                    }
                   >
                     {option.label}
                   </div>
@@ -122,10 +132,12 @@ const TableHeader = ({
           </div>
         )}
         {viewButtonText && (
-          <Button 
-            onClick={() => { onClickViewAll() }} 
-            className={classes?.viewAllBtn} 
-            leftIcon={<IoAddCircle size={20} color="var(--white)" />} 
+          <Button
+            onClick={() => {
+              onClickViewAll();
+            }}
+            className={classes?.viewAllBtn}
+            leftIcon={<IoAddCircle size={20} color="var(--white)" />}
             label={viewButtonText}
             variant="primary"
           />

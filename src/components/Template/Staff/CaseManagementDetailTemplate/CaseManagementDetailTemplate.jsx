@@ -1,37 +1,47 @@
 "use client";
 import Button from "@/components/atoms/Button";
+import DocCard from "@/components/atoms/DocCard/DocCard";
+import SearchInput from "@/components/atoms/SearchInput/SearchInput";
 import Wrapper from "@/components/atoms/Wrapper/Wrapper";
-import React, { useState, useRef, useEffect } from "react";
-import { IoChevronBack } from "react-icons/io5";
-import classes from "./CaseManagementDetailTemplate.module.css";
-import { Col, Row } from "react-bootstrap";
+import ActivityLog from "@/components/molecules/ActivityLog/ActivityLog";
+import Calender from "@/components/molecules/Calender/Calender";
+import CaseProgressCard from "@/components/molecules/CaseProgressCard/CaseProgressCard";
 import EvidenceTableTop from "@/components/molecules/EvidenceTableTop/EvidenceTableTop";
+import Notes from "@/components/molecules/Notes/Notes";
+import TabFilter from "@/components/molecules/TabFilter/TabFilter";
+import {
+  myEventsList,
+  caseManagementDetailData,
+} from "@/developementContent/Data/dummtData/dummyData";
 import {
   auditTrackingOptions,
   caseDetailTabs,
 } from "@/developementContent/Enums/enum";
-import Calender from "@/components/molecules/Calender/Calender";
-import { myEventsList } from "@/developementContent/Data/dummtData/dummyData";
-import TabFilter from "@/components/molecules/TabFilter/TabFilter";
-import Notes from "@/components/molecules/Notes/Notes";
-import ActivityLog from "@/components/molecules/ActivityLog/ActivityLog";
-import DocCard from "@/components/atoms/DocCard/DocCard";
-import SearchInput from "@/components/atoms/SearchInput/SearchInput";
-import { BiFilterAlt } from "react-icons/bi";
-import CaseProgressCard from "@/components/molecules/CaseProgressCard/CaseProgressCard";
 import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { Col, Row } from "react-bootstrap";
+import { BiFilterAlt } from "react-icons/bi";
+import { IoChevronBack } from "react-icons/io5";
 import { MdAddCircle } from "react-icons/md";
+import classes from "./CaseManagementDetailTemplate.module.css";
+import useAxios from "@/interceptor/axios-functions";
+import CircularLoadingComponent from "@/components/atoms/CircularLoadingComponent/CircularLoadingComponent";
 
 const CaseManagementDetailTemplate = ({ slug }) => {
-    const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
   const [selectedValue, setSelectedValue] = useState(auditTrackingOptions[0]);
   const [activeTab, setActiveTab] = useState(caseDetailTabs[0].value);
   const [showAddNoteModal, setShowAddNoteModal] = useState(false);
   const [isFilterOverlayOpen, setIsFilterOverlayOpen] = useState(false);
   const fileInputRef = useRef(null);
   const filterRef = useRef(null);
-
-  const router =useRouter();
+  const router = useRouter();
+  const [detailData, setDetailData] = useState(caseManagementDetailData);
+  const [loading, setLoading] = useState({
+    getCaseManagementDetailData: false,
+    getAuditTracking: false,
+  });
+  const { Get } = useAxios();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -63,13 +73,13 @@ const CaseManagementDetailTemplate = ({ slug }) => {
       label: "All",
       onClick: () => {
         console.log("Filter: All");
-      }
+      },
     },
     {
       label: "Latest",
       onClick: () => {
         console.log("Filter: Latest");
-      }
+      },
     },
   ];
 
@@ -114,11 +124,11 @@ const CaseManagementDetailTemplate = ({ slug }) => {
       case "notes":
         return (
           <div className={classes.notesContainer}>
-            <Notes 
-              showAddNoteModal={showAddNoteModal} 
+            <Notes
+              showAddNoteModal={showAddNoteModal}
               setShowAddNoteModal={setShowAddNoteModal}
-              searchValue={searchValue} 
-              setSearchValue={setSearchValue} 
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
             />
           </div>
         );
@@ -129,18 +139,7 @@ const CaseManagementDetailTemplate = ({ slug }) => {
               <h5>Recent activities</h5>
             </div>
             <div className={classes.activityListContainer}>
-              <ActivityLog
-                activities={[
-                  { text: "Status update to Defense", date: "May 1, 2025" },
-                  {
-                    text: "Status update to Evidence Round Opponent",
-                    date: "May 15, 2025",
-                  },
-                  { text: "Document Upload", date: "May 15, 2025" },
-                  { text: "Status update to Hearing", date: "May 17, 2025" },
-                  { text: "Document Upload", date: "May 18, 2025" },
-                ]}
-              />
+              <ActivityLog activities={detailData?.activities} />
             </div>
           </div>
         );
@@ -151,9 +150,9 @@ const CaseManagementDetailTemplate = ({ slug }) => {
               <h5>Case documents</h5>
               <div className={classes.docsHeaderRight}>
                 {/* Temporarily open file browsing: */}
-                <Button 
-                  label="Upload Document" 
-                  className={classes.uploadDocumentButton} 
+                <Button
+                  label="Upload Document"
+                  className={classes.uploadDocumentButton}
                   leftIcon={<MdAddCircle color="var(--white)" size={20} />}
                   onClick={handleUploadDocument}
                 />
@@ -164,10 +163,12 @@ const CaseManagementDetailTemplate = ({ slug }) => {
                   multiple
                   style={{ display: "none" }}
                 />
-                <SearchInput />
+                <SearchInput value={searchValue} setValue={setSearchValue} />
                 <div className={classes.filterWrapper} ref={filterRef}>
-                  <div 
-                    className={`${classes.filterIcon} ${isFilterOverlayOpen ? classes.filterIconActive : ""}`} 
+                  <div
+                    className={`${classes.filterIcon} ${
+                      isFilterOverlayOpen ? classes.filterIconActive : ""
+                    }`}
                     onClick={handleFilterIconClick}
                   >
                     <BiFilterAlt size={20} color="var(--black)" />
@@ -178,9 +179,13 @@ const CaseManagementDetailTemplate = ({ slug }) => {
                         <div
                           key={index}
                           className={classes.filterOption}
-                          onClick={() => handleFilterOptionClick(option.onClick || (() => {}))}
+                          onClick={() =>
+                            handleFilterOptionClick(
+                              option.onClick || (() => {})
+                            )
+                          }
                         >
-                          {option.label}
+                          {option?.label}
                         </div>
                       ))}
                     </div>
@@ -189,13 +194,8 @@ const CaseManagementDetailTemplate = ({ slug }) => {
               </div>
             </div>
             <div className={classes.docListContainer}>
-              {documents.map((doc) => (
-                <DocCard
-                  key={doc.id}
-                  title={doc.title}
-                  dateTime={doc.dateTime}
-                  visibilityText={doc.visibilityText}
-                />
+              {detailData?.documents?.map((doc) => (
+                <DocCard key={doc.id} data={doc} />
               ))}
             </div>
           </div>
@@ -204,7 +204,20 @@ const CaseManagementDetailTemplate = ({ slug }) => {
         return null;
     }
   };
-
+  // detail
+  const getCaseManagementDetailData = async () => {
+    setLoading((prev) => ({ ...prev, getCaseManagementDetailData: true }));
+    const { response } = await Get({
+      route: `admin/cases/${slug}`,
+    });
+    if (response) {
+      setDetailData(response?.data);
+    }
+    setLoading((prev) => ({ ...prev, getCaseManagementDetailData: false }));
+  };
+  // useEffect(() => {
+  //   getCaseManagementDetailData();
+  // }, [slug]);
   return (
     <div className="p24">
       <Wrapper
@@ -222,38 +235,13 @@ const CaseManagementDetailTemplate = ({ slug }) => {
         }
       >
         <div className={classes?.content}>
+          {loading?.getCaseManagementDetailData && <CircularLoadingComponent />}
           <Row>
             <Col md={4}>
               <CaseProgressCard
-                data={{
-                  tabLabel: "EU TM OPPO",
-                  userName: "Assigned Staff",
-                  progress: 80,
-                  status: "Decision",
-                  trademarkName: "A and Sons",
-                  trademarkNo: "R-3526",
-                  referenceLink: "#",
-                  primaryStaff: "Roxanne Gleichner",
-                  secondaryStaff: "Roxanne Gleichner",
-                  jurisdiction: "EUIPO",
-                  clientName: "Dana Auer",
-                  deadlines: [
-                    { label: "Defense", value: "Nov 20, 25" },
-                    { label: "Second Observations", value: "Dec 20, 25" },
-                    { label: "Decision", value: "Jan 20, 26" },
-                  ],
-                  tasks: ['Evidence Round Opponent'],
-                  officeDeadline: "2024-11-20",
-                  internalDeadline: "2024-11-23",
-                  reference: {
-                    referenceName: "My Web",
-                    link: "#",
-                    refrenece: [
-                      { label: "Reference 1", value: "Reference 1" },
-                      { label: "Reference 2", value: "Reference 2" },
-                    ]
-                  },
-                }}
+                // for api
+                // data={detailData}
+                data={caseManagementDetailData}
                 // isAssignedStaffVariant
                 isCaseDetailVariant
               />
@@ -270,7 +258,10 @@ const CaseManagementDetailTemplate = ({ slug }) => {
                   />
                 }
               >
-                <Calender events={myEventsList} />
+                <Calender
+                  events={myEventsList}
+                  loading={loading?.getAuditTracking}
+                />
               </Wrapper>
 
               <Wrapper

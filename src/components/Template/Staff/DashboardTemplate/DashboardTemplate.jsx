@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./DashboardTemplate.module.css";
 import { Col, Row } from "react-bootstrap";
 import Wrapper from "@/components/atoms/Wrapper/Wrapper";
@@ -13,23 +13,69 @@ import { staffDashboardTableHeader } from "@/developementContent/TableHeader/Sta
 import { staffDashboardTableBody } from "@/developementContent/TableBody/StaffDashboardTableBody";
 import TableHeader from "@/components/molecules/TableHeader/TableHeader";
 import AppTable from "@/components/organisms/AppTable/AppTable";
-import { caseStatusFilters, reactActivities } from "@/developementContent/Enums/enum";
+import {
+  caseStatusFilters,
+  reactActivities,
+} from "@/developementContent/Enums/enum";
 import { useRouter } from "next/navigation";
 import CreateNewCaseModal from "@/components/organisms/Modals/CreateNewCaseModal/CreateNewCaseModal";
+import useAxios from "@/interceptor/axios-functions";
+import useDebounce from "@/resources/hooks/useDebounce";
 
 const DashboardTemplate = () => {
-  const [searchValue, setSearchValue] = useState("");
-  const [selectedDropdownValue, setSelectedDropdownValue] = useState(
-    caseStatusFilters[0]
-  );
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState(caseStatusFilters[0]);
   const [showCreateNewCaseModal, setShowCreateNewCaseModal] = useState(false);
   const router = useRouter();
+  const [loading, setLoading] = useState({
+    getEventsSlots: false,
+    getAllActivities: false,
+  });
+  const [page, setPage] = useState(1);
+  const { Get } = useAxios();
+  // const [tableData, setTableData] = useState();
+
+  const [totalRecords, setTotalRecords] = useState(0);
+  const debouncedSearch = useDebounce(search, 500);
+
+  // recent activities
+  const getAllActivities = async ({
+    _pg = page,
+    _search = search,
+    _status = status,
+  }) => {
+    setLoading((prev) => ({ ...prev, getAllActivities: true }));
+    const body = {
+      search: _search,
+      limit: RECORDS_LIMIT,
+      page: _pg,
+      ...(_status &&
+        _status !== "all" &&
+        status?.value !== "all" && { status: _status?.value }),
+    };
+    const queryParams = new URLSearchParams(body).toString();
+    const { response } = await Get({
+      route: `admin/activities?${queryParams}`,
+      data: body,
+    });
+    if (response) {
+      setTableData(response?.data);
+      setTotalRecords(response?.totalRecords);
+    }
+    setLoading((prev) => ({ ...prev, getAllActivities: false }));
+  };
+  // useEffect(() => {
+  //   getAllActivities({
+  //     _pg: 1,
+  //     _search: debouncedSearch,
+  //     _status: status,
+  //   });
+  // }, [debouncedSearch, status]);
 
   const handleDropdownChange = (value) => {
-    setSelectedDropdownValue(value);
+    setStatus(value);
   };
 
-  
   const getGreeting = () => {
     const currentHour = new Date().getHours();
     if (currentHour >= 5 && currentHour < 12) {
@@ -43,13 +89,15 @@ const DashboardTemplate = () => {
 
   return (
     <div>
-    <div className={classes?.dashboardTemplateHeader}>
-        <h4>{new Date().toLocaleDateString("en-US", {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric",
-              })}</h4>
+      <div className={classes?.dashboardTemplateHeader}>
+        <h4>
+          {new Date().toLocaleDateString("en-US", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })}
+        </h4>
         <p>{getGreeting()}, John Doe.</p>
       </div>
       <div className="p24">
@@ -59,7 +107,11 @@ const DashboardTemplate = () => {
               contentClassName={classes?.calenderWrapper}
               headerComponent={<CalenderHeaderDrop />}
             >
-              <Calender className={classes?.calender} events={myEventsList} />
+              <Calender
+                className={classes?.calender}
+                events={myEventsList}
+                loading={loading?.getEventsSlots}
+              />
             </Wrapper>
           </Col>
           <Col lg={5}>
@@ -74,11 +126,11 @@ const DashboardTemplate = () => {
                       onClick={
                         item.title === "Create New Case"
                           ? () => setShowCreateNewCaseModal(true)
-                          :
-                          item.title === "Add a Document"
-                          ?() => {
+                          : item.title === "Add a Document"
+                          ? () => {
                               router.push("/document-management");
-                            }:undefined
+                            }
+                          : undefined
                       }
                     />
                   </Col>
@@ -97,8 +149,10 @@ const DashboardTemplate = () => {
                   title="Recent Activities"
                   dropdownOptions={caseStatusFilters}
                   dropdownPlaceholder="Select Activity"
-                  selectedDropdownValue={selectedDropdownValue}
-                  setSelectedDropdownValue={setSelectedDropdownValue}
+                  selectedDropdownValue={status}
+                  setSelectedDropdownValue={setStatus}
+                  searchValue={search}
+                  onSearchChange={setSearch}
                 />
               }
               className={classes.wrapper}
@@ -107,6 +161,20 @@ const DashboardTemplate = () => {
               <ResponsiveTable
                 tableHeader={staffDashboardTableHeader}
                 data={staffDashboardTableBody}
+                noDataText={"No Recent Activities Found"}
+                // data={tableData}
+                pagination={true}
+                // loading={loading?.getAllActivities}
+                page={page}
+                totalRecords={totalRecords}
+                // onPageChange={(page) => {
+                //   setPage(page);
+                //   getAllActivities({
+                //     _pg: page,
+                //     _search: debouncedSearch,
+                //     _status: status,
+                //   });
+                // }}
               />
             </Wrapper>
           </Col>
